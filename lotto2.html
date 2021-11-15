@@ -55,24 +55,23 @@
         <div class="container-fluid">
             <h1 class="mt-4">이 페이지는 로또 페이지</h1>
 
-            <button class="btn btn-primary" id="btn">CLICK</button>
-           <style>
-               #resultDiv{
-                   display:flex;
-               }
+            <div class="input-group mb-3">
+                <input type="number" id="moneyInput" class="form-control" placeholder="얼마?" value="3000">
+                <button class="btn btn-outline-secondary mybtn" type="button" >Button</button>
+            </div>
 
-               #resultDiv>h3{
-                   box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
-                   background-color: pink;
-                   color:white;
-                   margin:10px;
-                   padding:20px;
-                   border-radius:40px;
-               }
-           </style>
+
 
             <div id="resultDiv">
-
+<!--                <ul class=""pagination>-->
+<!--                    <li class=""-->
+<!--                    <li class="">11</li>-->
+<!--                    <li>11</li>-->
+<!--                    <li>11</li>-->
+<!--                    <li>11</li>-->
+<!--                    <li>11</li>-->
+<!--                    <li>11</li>-->
+                </ul>
             </div>
         </div>
     </div>
@@ -85,12 +84,45 @@
 <script src="js/lotto.js"></script>
 
 <script>
-    console.log("----------------------")
-    console.log(btn)
+ const btn= document.querySelector(".mybtn")
 
-    btn.addEventListener("click", function() {
-        console.log("---------")
-    }, false)
+ btn.addEventListener("click", () => {
+     console.log("button clicked.....................")
+
+     const money= document.querySelector("#moneyInput").value
+
+     if(money<1000){
+        alert("이 금액으로 못 합니다.")
+         return
+     }
+
+     console.log(money)
+
+     const count= parseInt(money)/1000
+     const resultDiv=document.querySelector("#resultDiv")
+
+     let str=''
+
+     //3번도는것
+     for (let i = 0; i < count; i++) {
+        const balls=makeLottoNum()
+         //console.log(balls)
+         str += "<ul>"
+
+         //balls를 루프를 돌려
+         for (let j = 0; j < balls.length; j++) {
+              str+=`<li>${balls[j]}</li>`
+         }
+         str+="</ul>"
+
+     }//end,for
+
+     console.log("==============")
+     console.log(str)
+
+     resultDiv.innerHTML= str
+
+ }, false)
 
 </script>
 
